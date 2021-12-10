@@ -1,0 +1,24 @@
+body{
+    font-size:12px;
+}
+.edge-arrow{
+    display:inline-block;background-repeat: no-repeat;background-position: left center;background-size:contain;width:130px;height:20px;
+}
+.edge-arrow-triangle{
+    background-image: url(../images/nodes/icon-triangle.png);
+}
+.edge-arrow-triangle-rect{
+    background-image: url(../images/nodes/icon-triangle-rect.png);
+}
+.edge-arrow-circle{
+    background-image: url(../images/nodes/icon-circle.png);
+}
+.edge-arrow-rect{
+    background-image: url(../images/nodes/icon-rect.png);
+}
+.edge-arrow-vee{
+    background-image: url(../images/nodes/icon-vee.png);
+}
+.edge-arrow-normal{
+    background-image: url(../images/nodes/icon-normal.png);
+}
