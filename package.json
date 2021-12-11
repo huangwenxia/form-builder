@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "ant-design-vue": "^3.0.0-alpha.14",
+    "axios": "^0.24.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "vue": "^3.2.23",

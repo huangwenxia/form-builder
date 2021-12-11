@@ -53,7 +53,7 @@
 <!--  </div>-->
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 // import { defineComponent, ref, Ref, createVNode } from "vue"
 // import { useRouter } from "vue-router"
 // import api from "@/api"

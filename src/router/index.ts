@@ -25,15 +25,15 @@ const routes: Array<RouteRecordRaw> = [
     //     name: "Detail",
     //     component: () => import("../views/detail/index.vue")
     // },
-    // {
-    //     path: "/login",
-    //     name: "Login",
-    //     component: () => import("../views/public/Login.vue")
-    // }
+    {
+        path: "/login",
+        name: "Login",
+        component: () => import("../views/public/Login.vue")
+    }
 ]
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHistory(),
     routes
 })
 router.beforeEach((to, from, next) => {
