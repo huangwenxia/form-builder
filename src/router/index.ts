@@ -48,7 +48,7 @@ router.beforeEach((to, from, next) => {
                 next()
             })
             .catch(() => {
-                next({
+                next({//hwx:重定向到登录页面
                     path: "/login"
                 })
             })

@@ -40,7 +40,7 @@ const removePending = (config: AxiosRequestConfig) => {
 
 // 添加请求拦截器
 instance.interceptors.request.use(
-  (request) => {
+  (request:AxiosRequestConfig) => {
     if (!/^\/api/.test(request.url || "")) {
       request.url = "/api" + request.url
     }
@@ -50,8 +50,8 @@ instance.interceptors.request.use(
     })
 
     const token = localStorage.getItem("token")
-    if (token) {
-      // request?.headers?.authorization = token
+    if (token && request && request.headers) {
+        request.headers.authorization = token
     }
     return request
   },

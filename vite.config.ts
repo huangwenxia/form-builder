@@ -26,7 +26,7 @@ export default defineConfig({
         target: "http://h5.tucy.top", // 目标地址
         changeOrigin: true, // 修改源
         secure: false, // ssl
-        rewrite: path => path.replace("/api/", "/")
+        // rewrite: path => path.replace("/api/", "/")
       }
     }
   },

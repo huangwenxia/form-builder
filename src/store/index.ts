@@ -8,10 +8,10 @@ export interface GlobalDataProps {
 }
 
 export default createStore<GlobalDataProps>({
-    state: {
-        form: {} as FormProps,
-        user: {} as UserProps
-    },
+    // state: {
+    //     form: {} as FormProps,
+    //     user: {} as UserProps
+    // },
     mutations: {},
     actions: {},
     modules: {

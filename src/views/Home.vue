@@ -1,141 +1,132 @@
 <template>
-  <div>
-    home页面
+  <div class="container">
+    <HeaderBar />
+    <div class="content">
+      <div class="filter-head">
+        <div class="btn btn-primary" @click="toAdd">+ 新建表单</div>
+      </div>
+      <div class="tit-bar">
+        <span class="title">我的表单（{{ projectList.length }}）</span>
+      </div>
+      <div class="project-list">
+        <div class="item" @click="toDesign(item)" v-for="(item, index) in projectList" :key="index">
+          <div class="img">
+            <img class="empimg" src="../assets/images/empty.png" />
+            <div class="btn-group">
+              <a-tooltip title="预览">
+                <div class="btn btn-preview" @click.stop="toShow(item)">
+                  <EyeOutlined />
+                </div>
+              </a-tooltip>
+              <a-tooltip title="编辑">
+                <div class="btn btn-edit" @click.stop="toAdd(item)">
+                  <FormOutlined />
+                </div>
+              </a-tooltip>
+              <a-tooltip title="反馈详情">
+                <div class="btn btn-detail" @click.stop="toDetail(item)">
+                  <FileDoneOutlined />
+                </div>
+              </a-tooltip>
+              <a-tooltip title="删除">
+                <div class="btn btn-remove" @click.stop="remove(item)">
+                  <DeleteOutlined />
+                </div>
+              </a-tooltip>
+            </div>
+            <div class="status" v-html="getStatus(item)"></div>
+          </div>
+          <div class="det">
+            <div class="name">{{ item.title }}</div>
+            <div class="time">{{ item.createdAt }}</div>
+          </div>
+        </div>
+      </div>
+      <Loading :loading="loading" msg="" />
+      <Empty v-if="!loading && projectList.length <= 0"></Empty>
+      <a-pagination v-model:current="listQuery.page" :total="total" @change="loadData" style="text-align: center" />
+    </div>
+    <AddForm ref="addForm" />
   </div>
-<!--  <div class="container">-->
-<!--    <HeaderBar />-->
-<!--    <div class="content">-->
-<!--      <div class="filter-head">-->
-<!--        <div class="btn btn-primary" @click="toAdd">+ 新建表单</div>-->
-<!--      </div>-->
-<!--      <div class="tit-bar">-->
-<!--        <span class="title">我的表单（{{ projectList.length }}）</span>-->
-<!--      </div>-->
-<!--      <div class="project-list">-->
-<!--        <div class="item" @click="toDesign(item)" v-for="(item, index) in projectList" :key="index">-->
-<!--          <div class="img">-->
-<!--            <img class="empimg" src="../assets/images/empty.png" />-->
-<!--            <div class="btn-group">-->
-<!--              <a-tooltip title="预览">-->
-<!--                <div class="btn btn-preview" @click.stop="toShow(item)">-->
-<!--                  <EyeOutlined />-->
-<!--                </div>-->
-<!--              </a-tooltip>-->
-<!--              <a-tooltip title="编辑">-->
-<!--                <div class="btn btn-edit" @click.stop="toAdd(item)">-->
-<!--                  <FormOutlined />-->
-<!--                </div>-->
-<!--              </a-tooltip>-->
-<!--              <a-tooltip title="反馈详情">-->
-<!--                <div class="btn btn-detail" @click.stop="toDetail(item)">-->
-<!--                  <FileDoneOutlined />-->
-<!--                </div>-->
-<!--              </a-tooltip>-->
-<!--              <a-tooltip title="删除">-->
-<!--                <div class="btn btn-remove" @click.stop="remove(item)">-->
-<!--                  <DeleteOutlined />-->
-<!--                </div>-->
-<!--              </a-tooltip>-->
-<!--            </div>-->
-<!--            <div class="status" v-html="getStatus(item)"></div>-->
-<!--          </div>-->
-<!--          <div class="det">-->
-<!--            <div class="name">{{ item.title }}</div>-->
-<!--            <div class="time">{{ item.createdAt }}</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <loading :loading="loading" />-->
-<!--      <empty v-if="!loading && projectList.length <= 0"></empty>-->
-<!--      <a-pagination v-model:current="listQuery.page" :total="total" @change="loadData" style="text-align: center" />-->
-<!--    </div>-->
-<!--    <AddForm ref="addForm" />-->
-<!--  </div>-->
 </template>
 
 <script lang="ts" setup>
-// import { defineComponent, ref, Ref, createVNode } from "vue"
-// import { useRouter } from "vue-router"
-// import api from "@/api"
-// // import axios from "@/api/axios"
-// import { FormListItem } from "@/api/form"
-// import { FormOutlined, DeleteOutlined } from "@ant-design/icons-vue"
-// // import ModalDialog from "@/components/ModalDialog"
-// import HeaderBar from "@/components/HeaderBar/index.vue"
-// import AddForm from "./AddForm.vue"
-// import { Modal, message } from "ant-design-vue"
-// import { ExclamationCircleOutlined, EyeOutlined, FileDoneOutlined } from "@ant-design/icons-vue"
-// import { useLoadHook } from "@/hooks/useLoadHook"
-// export default defineComponent({
-//   name: "Home",
-//   components: { FormOutlined, DeleteOutlined, EyeOutlined, FileDoneOutlined, HeaderBar, AddForm },
-//   setup() {
-//     // const projectList: Ref<FormListItem[]> = ref([])
-//     const router = useRouter()
-//     const addForm: Ref<typeof AddForm | null> = ref(null)
-//     const { total, loading, list: projectList, listQuery, loadData } = useLoadHook<FormListItem>({ api: api.form.list })
-//     loadData()
-//     const toAdd = (data: FormListItem) => {
-//       addForm?.value?.open({
-//         data,
-//         success: () => {
-//           loadData()
-//         }
-//       })
-//     }
-//     const toDesign = (data: FormListItem): void => {
-//       router.push({
-//         path: "/design",
-//         query: {
-//           id: data.id
-//         }
-//       })
-//     }
-//     const toShow = (data: FormListItem): void => {
-//       const loca = router.resolve({
-//         path: "/show",
-//         query: {
-//           id: data.id
-//         }
-//       })
-//       window.open(loca.href, "_blank")
-//     }
-//     const toDetail = (data: FormListItem): void => {
-//       const loca = router.resolve({
-//         path: "/detail",
-//         query: {
-//           id: data.id
-//         }
-//       })
-//       window.open(loca.href, "_blank")
-//     }
-//     const remove = (data: FormListItem) => {
-//       Modal.confirm({
-//         title: "确定删除表单[" + data.title + "]吗？",
-//         icon: createVNode(ExclamationCircleOutlined),
-//         onOk() {
-//           api.form.remove(data.id).then(() => {
-//             message.success("删除成功")
-//             loadData()
-//           })
-//         },
-//         onCancel() {
-//           console.log("Cancel")
-//         }
-//       })
-//     }
-//     const map = [
-//       { value: 1, label: "待发布", color: "#2a82e4" },
-//       { value: 2, label: "已发布", color: "#4caf50" },
-//       { value: 3, label: "有修改", color: "#ff9600" }
-//     ]
-//     const getStatus = (data: FormListItem) => {
-//       const cur = map.find((a) => a.value == data.status)
-//       return (cur && `<span style="background-color: ${cur.color};">${cur.label}</span>`) || data.status
-//     }
-//     return { projectList, toAdd, toDesign, toShow, addForm, remove, getStatus, listQuery, loading, total, loadData, toDetail }
-//   }
-// })
+import {ref, Ref, createVNode } from "vue"
+import { useRouter } from "vue-router"
+import api from "@/api"
+import { FormListItem } from "@/api/form"
+import { FormOutlined, DeleteOutlined } from "@ant-design/icons-vue"
+import HeaderBar from "@/components/HeaderBar/index.vue"
+import AddForm from "./AddForm.vue"
+import { Modal, message } from "ant-design-vue"
+import { ExclamationCircleOutlined, EyeOutlined, FileDoneOutlined } from "@ant-design/icons-vue"
+import { useLoadHook } from "@/hooks/useLoadHook"
+import Empty from "@/components/Empty.vue";
+import Loading from "@/components/Loading.vue";
+
+// const projectList: Ref<FormListItem[]> = ref([])
+const router = useRouter()
+const addForm: Ref<typeof AddForm | null> = ref(null)
+const { total, loading, list: projectList, listQuery, loadData } = useLoadHook<FormListItem>({ api: api.form.list })
+loadData()
+const toAdd = (data: FormListItem) => {
+  addForm?.value?.open({
+    data,
+    success: () => {
+      loadData()
+    }
+  })
+}
+const toDesign = (data: FormListItem): void => {
+  router.push({
+    path: "/design",
+    query: {
+      id: data.id
+    }
+  })
+}
+const toShow = (data: FormListItem): void => {
+  const loca = router.resolve({
+    path: "/show",
+    query: {
+      id: data.id
+    }
+  })
+  window.open(loca.href, "_blank")
+}
+const toDetail = (data: FormListItem): void => {
+  const loca = router.resolve({
+    path: "/detail",
+    query: {
+      id: data.id
+    }
+  })
+  window.open(loca.href, "_blank")
+}
+const remove = (data: FormListItem) => {
+  Modal.confirm({
+    title: "确定删除表单[" + data.title + "]吗？",
+    icon: createVNode(ExclamationCircleOutlined),
+    onOk() {
+      api.form.remove(data.id).then(() => {
+        message.success("删除成功")
+        loadData()
+      })
+    },
+    onCancel() {
+      console.log("Cancel")
+    }
+  })
+}
+const map = [
+  { value: 1, label: "待发布", color: "#2a82e4" },
+  { value: 2, label: "已发布", color: "#4caf50" },
+  { value: 3, label: "有修改", color: "#ff9600" }
+]
+const getStatus = (data: FormListItem) => {
+  const cur = map.find((a) => a.value == data.status)
+  return (cur && `<span style="background-color: ${cur.color};">${cur.label}</span>`) || data.status
+}
 </script>
 <style scoped lang="scss">
 .container {

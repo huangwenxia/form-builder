@@ -1,6 +1,6 @@
 import { Module } from "vuex"
 import { GlobalDataProps } from "./index"
-import { SelectTypes } from "ant-design-vue/es/select"
+import { SelectProps } from "ant-design-vue/es/select"
 //整个编辑过程存储的那个表单对象
 export interface FormDetailType {
   id: number
@@ -11,14 +11,14 @@ export interface FormDetailType {
 }
 //每个表单项的类型
 export interface ModuleType {
-  [key: string]: string | boolean | SelectTypes["options"] | Array<string>
+  [key: string]: string | boolean | SelectProps["options"] | Array<string>
   id: string
   label: string
   type: string
   required: false
   desc?: string
   placeholder?: string
-  options?: SelectTypes["options"]
+  options?: SelectProps["options"]
   defaultValue?: string | Array<string>
 }
 export interface ContentType {
