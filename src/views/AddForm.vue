@@ -76,4 +76,7 @@ const handleOk = () => {
       })
 }
 
+defineExpose({
+  open,
+})
 </script>

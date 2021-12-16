@@ -10,20 +10,20 @@ const routes: Array<RouteRecordRaw> = [
         name: "Home",
         component: Home
     },
-    // {
-    //     path: "/design",
-    //     name: "Design",
-    //     component: () => import("../views/design/index.vue")
-    // },
-    // {
-    //     path: "/show",
-    //     name: "Show",
-    //     component: () => import("../views/show/index.vue")
-    // },
+    {
+        path: "/design",
+        name: "Design",
+        component: () => import("@/views/designer/index.vue")
+    },
+    {
+        path: "/show",
+        name: "Show",
+        component: () => import("@/views/show/index.vue")
+    },
     // {
     //     path: "/detail",
     //     name: "Detail",
-    //     component: () => import("../views/detail/index.vue")
+    //     component: () => import("@/views/detail/index.vue")
     // },
     {
         path: "/login",
