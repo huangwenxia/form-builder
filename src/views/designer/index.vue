@@ -1,6 +1,6 @@
 <template>
   <div class="design-container">
-    <PanelHeader/>
+    <PanelHeader :detail="detail"/>
     <PanelCenter/>
     <PanelLeft/>
     <PanelRight/>
@@ -12,6 +12,8 @@ import PanelCenter from "./PanelCenter/index.vue"
 import PanelHeader from "./PanelHeader/index.vue"
 import PanelLeft from "./PanelLeft/index.vue"
 import PanelRight from "./PanelRight/index.vue"
+import { useDetailHook } from "./useDetailHook"
+const {detail} = useDetailHook()
 </script>
 
 <style lang="scss" scoped>

@@ -27,11 +27,24 @@
   </div>
   <Preview ref="previewRef" />
 </template>
-
+<script lang="ts">
+import { SendOutlined,DownloadOutlined } from "@ant-design/icons-vue"
+export default {
+  components:{SendOutlined,DownloadOutlined},
+}
+</script>
 <script setup lang="ts">
 import Preview from "./preview.vue"
 import { useSaveHook } from "./useSaveHook"
-const { save, publish, preview, loading, previewRef } = useSaveHook()
+import { FormDetailType } from "@/store/form"
+interface Props {
+  detail:FormDetailType | any,
+}
+const props = withDefaults(defineProps<Props>(), {
+  detail:{},
+})
+// const saveData = {detail:detail}
+const { save, publish, preview, loading, previewRef } = useSaveHook(props.detail)
 </script>
 
 <style lang="scss" scoped>

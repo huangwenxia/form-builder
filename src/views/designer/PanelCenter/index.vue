@@ -5,14 +5,90 @@
         <div class="title">{{'测试表达' }}</div>
         <div class="desc">{{ '测试表达' }}</div>
       </div>
+      <div class="content">
+        <div class="form">
+          <ItemControl>
+            <div class="form-item">
+              <div class="title">
+                <div class="tit">文本框<span style="color: red">*</span></div>
+                <div class="txt"></div>
+              </div>
+              <div class="det">
+                <div class="component">
+                  <a-input/>
+<!--                  <FormItem :data="item" v-model="form[item.id]" />-->
+                </div>
+              </div>
+            </div>
+          </ItemControl>
+          <ItemControl>
+            <div class="form-item">
+              <div class="title">
+                <div class="tit">单选<span style="color: red">*</span></div>
+                <div class="txt"></div>
+              </div>
+              <div class="det">
+                <div class="component">
+                  <a-radio-group >
+                    <a-radio :value="1" :style="radioStyle">Option A</a-radio>
+                    <a-radio :value="2" :style="radioStyle">Option B</a-radio>
+                  </a-radio-group>
+                </div>
+              </div>
+            </div>
+          </ItemControl>
+          <ItemControl>
+            <div class="form-item">
+              <div class="title">
+                <div class="tit">多选<span style="color: red">*</span></div>
+                <div class="txt"></div>
+              </div>
+              <div class="det">
+                <div class="component">
+                  <a-checkbox>Checkbox1</a-checkbox>
+                  <br />
+                  <a-checkbox>Checkbox2</a-checkbox>
+                  <br />
+                  <a-checkbox>Checkbox3</a-checkbox>
+                </div>
+              </div>
+            </div>
+          </ItemControl>
+          <ItemControl>
+            <div class="form-item">
+              <div class="title">
+                <div class="tit">下拉<span style="color: red">*</span></div>
+                <div class="txt"></div>
+              </div>
+              <div class="det">
+                <div class="component">
+                  <a-select ref="select" style="width: 100%">
+                    <a-select-option value="jack">Jack</a-select-option>
+                  </a-select>
+                  <!--                  <FormItem :data="item" v-model="form[item.id]" />-->
+                </div>
+              </div>
+            </div>
+          </ItemControl>
+          <ItemControl :isEmpty="true">
+            <div class="form-item">
+              <div class="empty">请从左侧点击拖拽组件</div>
+            </div>
+          </ItemControl>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import {ref} from "vue";
-
-  const a =ref(0)
+  import {reactive} from "vue";
+  import ItemControl from "./itemControl.vue"
+  const radioStyle = reactive({
+    display: 'flex',
+    height: '30px',
+    lineHeight: '30px',
+  });
 </script>
 
 <style lang="scss" scoped>
@@ -41,6 +117,34 @@
       }
       .desc {
         margin-top: 10px;
+      }
+    }
+    .content{
+      .form{
+        .form-item{
+          padding: 12px 30px;
+          pointer-events: none;
+          .title {
+            margin-bottom: 10px;
+            .tit{
+
+            }
+            .txt {
+              color: #999;
+            }
+          }
+          .det {
+            padding-left: 10px;
+            .component {
+              width: 80%;
+            }
+          }
+          .empty {
+            text-align: center;
+            padding: 30px 0;
+            color: #999;
+          }
+        }
       }
     }
   }

@@ -19,7 +19,6 @@
 import { PicCenterOutlined, UnorderedListOutlined, DownSquareOutlined, CalendarOutlined, FieldBinaryOutlined } from "@ant-design/icons-vue"
 export default {
   components: { PicCenterOutlined, UnorderedListOutlined, DownSquareOutlined, CalendarOutlined, FieldBinaryOutlined },
-
 }
 </script>
 <script setup lang="ts">
