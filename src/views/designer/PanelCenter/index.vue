@@ -83,7 +83,11 @@
 
 <script setup lang="ts">
   import {reactive} from "vue";
-  import ItemControl from "./itemControl.vue"
+  import ItemControl from "./ItemControl.vue"
+  // import ContentType from "@/views/designer/interface"
+  // const props = withDefaults(defineProps<ContentType>(),{
+  //
+  // })
   const radioStyle = reactive({
     display: 'flex',
     height: '30px',

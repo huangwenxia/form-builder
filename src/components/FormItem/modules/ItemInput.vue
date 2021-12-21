@@ -4,10 +4,10 @@
 <script lang="ts">
 import { defineComponent, PropType, ref, watch } from "vue"
 
-import { ModuleType } from "@/store/form"
+import { FormItemType } from "@/views/designer/interface"
 const Props = {
   data: {
-    type: Object as PropType<ModuleType>,
+    type: Object as PropType<FormItemType>,
     default() {
       return {}
     }

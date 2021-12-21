@@ -33,7 +33,7 @@ import {ref, Ref, computed } from "vue"
 import api from "@/api"
 import { SaveParams } from "@/api/form/answer"
 import { useRoute } from "vue-router"
-import { FormDetailType, ContentType } from "@/store/form"
+import { FormDetailType, ContentType } from "@/views/designer/interface"
 import { message } from "ant-design-vue"
 // import FormItem from "@/components/FormItem/index.vue"
 const props = defineProps({

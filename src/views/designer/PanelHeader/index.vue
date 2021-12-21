@@ -36,15 +36,15 @@ export default {
 <script setup lang="ts">
 import Preview from "./preview.vue"
 import { useSaveHook } from "./useSaveHook"
-import { FormDetailType } from "@/store/form"
+import * as I from "@/api/interface"
 interface Props {
-  detail:FormDetailType | any,
+  detail:I.designer.FormDetailType,
 }
-const props = withDefaults(defineProps<Props>(), {
-  detail:{},
+const props = withDefaults(defineProps<Props>(),{
+  detail:() => ({} as I.designer.FormDetailType)
 })
-// const saveData = {detail:detail}
-const { save, publish, preview, loading, previewRef } = useSaveHook(props.detail)
+const saveData = {detail:props.detail}
+const { save, publish, preview, loading, previewRef } = useSaveHook(saveData)
 </script>
 
 <style lang="scss" scoped>

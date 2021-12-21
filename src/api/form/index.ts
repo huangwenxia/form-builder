@@ -25,7 +25,7 @@ export function save(opt: UpdateParams): Promise<BaseResponse<undefined>> {
 //修改
 export interface UpdateParams {
   id?: number
-  title: string
+  title: string | undefined
   desc?: string
   content: string
   cover?: string

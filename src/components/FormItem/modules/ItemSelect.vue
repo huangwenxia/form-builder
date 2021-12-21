@@ -4,7 +4,7 @@
 <script lang="ts">
 // import { SelectTypes } from "ant-design-vue/es/select"
 import { defineComponent, ref, PropType, watch } from "vue"
-import { ModuleType } from "@/store/form"
+import { FormItemType } from "@/views/designer/interface"
 
 interface Value {
   value?: string
@@ -12,7 +12,7 @@ interface Value {
 }
 const Prop = {
   data: {
-    type: Object as PropType<ModuleType>,
+    type: Object as PropType<FormItemType>,
     default() {
       return {}
     }

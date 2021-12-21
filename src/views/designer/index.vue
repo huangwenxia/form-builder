@@ -1,8 +1,8 @@
 <template>
   <div class="design-container">
     <PanelHeader :detail="detail"/>
-    <PanelCenter/>
-    <PanelLeft/>
+    <PanelCenter :content="detail.content" />
+    <PanelLeft :detail="detail"/>
     <PanelRight/>
   </div>
 </template>

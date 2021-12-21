@@ -1,11 +1,11 @@
-import { ref, Ref } from "vue"
-import { FormDetailType } from "@/store/form"
+import {ref, Ref} from "vue"
+import * as I  from "@/api/interface"
 import * as Utils from "@/utils"
 import api from "@/api"
 import { UpdateParams } from "@/api/form"
 import { message } from "ant-design-vue"
 interface SavePrams {
-  detail: FormDetailType
+  detail: I.designer.FormDetailType
 }
 interface ReturnType {
   loading: Ref<boolean>

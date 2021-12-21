@@ -1,8 +1,8 @@
 <template>
   <div class="module-control">
-    <div class="drag-hear active"><span>放在这里</span></div>
+    <div class="drag-hear"><span>放在这里</span></div>
     <div class="outline"></div>
-    <div class="control" v-if="!isEmpty">
+    <div class="control" v-if="!props.isEmpty">
       <div class="btn"><ArrowUpOutlined /></div>
       <div class="btn"><ArrowDownOutlined /></div>
       <div class="btn"><CloseOutlined /></div>
@@ -17,8 +17,11 @@ export  default {
 }
 </script>
 <script setup lang="ts">
-const props = defineProps({
-  isEmpty:Boolean
+ interface Props {
+  isEmpty?:boolean,//非必填
+}
+const props = withDefaults(defineProps<Props>(),{
+  isEmpty:false
 })
 </script>
 

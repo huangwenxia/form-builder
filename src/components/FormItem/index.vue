@@ -3,7 +3,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref, watch } from "vue"
-import { ModuleType } from "@/store/form"
+import { FormItemType } from "@/views/designer/interface"
 
 import ItemInput from "./modules/ItemInput.vue"
 import ItemRadio from "./modules/ItemRadio.vue"
@@ -11,7 +11,7 @@ import ItemCheckbox from "./modules/ItemCheckbox.vue"
 import ItemSelect from "./modules/ItemSelect.vue"
 const Props = {
   data: {
-    type: Object as PropType<ModuleType>,
+    type: Object as PropType<FormItemType>,
     default() {
       return {}
     }
