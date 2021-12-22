@@ -1,15 +1,22 @@
 
 import {reactive} from "vue"
 import api from "@/api"
-import {ContentType} from "@/views/designer/interface";
+import * as I from "@/api/interface";
+import {StyleType} from "@/api/interface/designer";
 
 export function useDetailHook(){
     const detail = reactive({
         id: '',
-        title: '',
-        desc: '',
+        title: '测试表达',
+        desc: '测试表达',
         cover: '',
-        content: {} as ContentType
+        content: {
+            skin: {
+                containerStyle: {},
+                headerStyle:{},
+            },
+            modules:[],
+        }
     });
 
     return {detail}

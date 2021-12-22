@@ -1,78 +1,28 @@
 <template>
-  <div class="panel-center">
+  <div class="panel-center"  :style="content.skin.containerStyle">
     <div class="wrapper">
-      <div class="head">
-        <div class="title">{{'测试表达' }}</div>
-        <div class="desc">{{ '测试表达' }}</div>
+      <div class="head" :style="content.skin.headerStyle">
+        <div class="title">{{detail.title }}</div>
+        <div class="desc">{{ detail.desc}}</div>
       </div>
       <div class="content">
         <div class="form">
-          <ItemControl>
+          <ItemControl v-for="(item,index) in modules" :key="index" :data="item" :isEmpty="false">
             <div class="form-item">
               <div class="title">
-                <div class="tit">文本框<span style="color: red">*</span></div>
-                <div class="txt"></div>
+                <div class="tit">{{item.label}}<span style="color: red">*</span></div>
+                <div class="txt">{{item.desc}}</div>
               </div>
               <div class="det">
                 <div class="component">
-                  <a-input/>
-<!--                  <FormItem :data="item" v-model="form[item.id]" />-->
-                </div>
-              </div>
-            </div>
-          </ItemControl>
-          <ItemControl>
-            <div class="form-item">
-              <div class="title">
-                <div class="tit">单选<span style="color: red">*</span></div>
-                <div class="txt"></div>
-              </div>
-              <div class="det">
-                <div class="component">
-                  <a-radio-group >
-                    <a-radio :value="1" :style="radioStyle">Option A</a-radio>
-                    <a-radio :value="2" :style="radioStyle">Option B</a-radio>
-                  </a-radio-group>
-                </div>
-              </div>
-            </div>
-          </ItemControl>
-          <ItemControl>
-            <div class="form-item">
-              <div class="title">
-                <div class="tit">多选<span style="color: red">*</span></div>
-                <div class="txt"></div>
-              </div>
-              <div class="det">
-                <div class="component">
-                  <a-checkbox>Checkbox1</a-checkbox>
-                  <br />
-                  <a-checkbox>Checkbox2</a-checkbox>
-                  <br />
-                  <a-checkbox>Checkbox3</a-checkbox>
-                </div>
-              </div>
-            </div>
-          </ItemControl>
-          <ItemControl>
-            <div class="form-item">
-              <div class="title">
-                <div class="tit">下拉<span style="color: red">*</span></div>
-                <div class="txt"></div>
-              </div>
-              <div class="det">
-                <div class="component">
-                  <a-select ref="select" style="width: 100%">
-                    <a-select-option value="jack">Jack</a-select-option>
-                  </a-select>
-                  <!--                  <FormItem :data="item" v-model="form[item.id]" />-->
+                  <FromItem :data="item" v-model="form[item.id]" :form="form"/>
                 </div>
               </div>
             </div>
           </ItemControl>
           <ItemControl :isEmpty="true">
             <div class="form-item">
-              <div class="empty">请从左侧点击拖拽组件</div>
+              <div class="empty">请从左侧点击或拖拽组件</div>
             </div>
           </ItemControl>
         </div>
@@ -82,17 +32,22 @@
 </template>
 
 <script setup lang="ts">
-  import {reactive} from "vue";
+import {computed, reactive, watchEffect} from "vue";
+  import FromItem from "@/components/FormItem/index.vue";
   import ItemControl from "./ItemControl.vue"
-  // import ContentType from "@/views/designer/interface"
-  // const props = withDefaults(defineProps<ContentType>(),{
-  //
-  // })
-  const radioStyle = reactive({
-    display: 'flex',
-    height: '30px',
-    lineHeight: '30px',
-  });
+  import * as I from "@/api/interface"
+  interface Props {
+    content:I.designer.ContentType
+    detail:I.designer.FormDetailType
+  }
+  const props = withDefaults(defineProps<Props>(),{
+      content:()=>({} as I.designer.ContentType),
+      detail:()=>({} as I.designer.FormDetailType),
+  })
+  const modules = computed(()=>{
+    return props.content && props.content.modules || []
+  })
+  const form = reactive({})
 </script>
 
 <style lang="scss" scoped>

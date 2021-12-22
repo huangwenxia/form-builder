@@ -1,7 +1,7 @@
 <template>
   <div class="design-container">
     <PanelHeader :detail="detail"/>
-    <PanelCenter :content="detail.content" />
+    <PanelCenter :content="detail.content" :detail="detail"/>
     <PanelLeft :detail="detail"/>
     <PanelRight/>
   </div>

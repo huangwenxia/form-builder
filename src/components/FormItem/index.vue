@@ -1,48 +1,44 @@
 <template>
-  <component :is="componentMap[data.type]" :data="data" v-model="model" />
+  <component :is="componentMap[data.type]" :data="data" v-model="modelValue" />
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from "vue"
-import { FormItemType } from "@/views/designer/interface"
-
 import ItemInput from "./modules/ItemInput.vue"
 import ItemRadio from "./modules/ItemRadio.vue"
 import ItemCheckbox from "./modules/ItemCheckbox.vue"
 import ItemSelect from "./modules/ItemSelect.vue"
-const Props = {
-  data: {
-    type: Object as PropType<FormItemType>,
-    default() {
-      return {}
-    }
-  },
-  modelValue: {
-    type: String,
-    default: ""
-  }
+export default {
+  components: { ItemInput, ItemRadio, ItemCheckbox, ItemSelect }
+
 }
-export default defineComponent({
-  name: "FormItem",
-  components: { ItemInput, ItemRadio, ItemCheckbox, ItemSelect },
-  props: Props,
-  setup(props, context) {
-    const componentMap = ref({
-      input: "item-input",
-      radio: "item-radio",
-      checkbox: "item-checkbox",
-      select: "item-select"
-    })
-    const model = ref(props.modelValue)
-    watch(model, function (val) {
-      context.emit("update:modelValue", val)
-    })
-    watch(
-      () => props.modelValue,
-      function (val) {
-        model.value = props.modelValue
-      }
-    )
-    return { componentMap, model }
-  }
+</script>
+
+<script lang="ts" setup>
+import {ref, watchEffect} from "vue"
+import * as I from "@/api/interface"
+interface SaveForm {
+  [key: string]: string | string[]
+}
+interface Props {
+  data:I.designer.FormItemType,
+  modelValue:string,
+  form:SaveForm
+}
+const props = withDefaults(defineProps<Props>(),{
+  data:()=>({} as I.designer.FormItemType),
+  modelValue:"",
+  form:()=>({} as SaveForm)
 })
+const componentMap = ref({
+  input: "ItemInput",
+  radio: "ItemRadio",
+  checkbox: "ItemCheckbox",
+  select: "ItemSelect"
+})
+const init = ()=>{
+  if(!props.data['id']) {
+    props.data['id'] = "";
+  }
+  props.form[props.data['id']] = props.data.defaultValue || "";
+}
+init();
 </script>

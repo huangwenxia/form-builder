@@ -10,7 +10,7 @@
        </ul>
     </div>
     <div class="tab-content" v-show="currTab==0">
-      <Modules />
+      <Modules :modules="detail.content.modules" />
     </div>
     <div class="tab-content" v-show="currTab==1">
       皮肤
@@ -26,6 +26,13 @@ export default {
 <script setup lang="ts">
 import {ref} from "vue";
 import Modules from "./Modules.vue"
+import * as I from "@/api/interface"
+interface Props {
+  detail:I.designer.FormDetailType,
+}
+const props = withDefaults(defineProps<Props>(),{
+  detail:() => ({} as I.designer.FormDetailType)
+})
 const menuArray = ref([
   { name: "模块", icon: 'AppstoreOutlined' },
   { name: "皮肤", icon: 'FileTextOutlined' }

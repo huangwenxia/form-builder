@@ -1,37 +1,14 @@
 <template>
-  <a-input v-model:value="model" :placeholder="data.placeholder" />
+  <a-input v-model="modelValue" :placeholder="data.placeholder" />
 </template>
-<script lang="ts">
-import { defineComponent, PropType, ref, watch } from "vue"
-
-import { FormItemType } from "@/views/designer/interface"
-const Props = {
-  data: {
-    type: Object as PropType<FormItemType>,
-    default() {
-      return {}
-    }
-  },
-  modelValue: {
-    type: String,
-    default: ""
-  }
+<script lang="ts" setup>
+import * as I from "@/api/interface"
+interface Props {
+  data:I.designer.FormItemType,
+  modelValue:string
 }
-export default defineComponent({
-  name: "ItemInput",
-  props: Props,
-  setup(props, context) {
-    const model = ref("")
-    watch(model, (val) => {
-      context.emit("update:modelValue", val)
-    })
-    watch(
-      () => props.modelValue,
-      function (val) {
-        model.value = val
-      }
-    )
-    return { model }
-  }
+const props = withDefaults(defineProps<Props>(),{
+  data:()=>({} as I.designer.FormItemType),
+  modelValue:"",
 })
 </script>

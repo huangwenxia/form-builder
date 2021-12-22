@@ -1,6 +1,6 @@
 <template>
     <div class="Modules">
-      <div class="m-box" v-for="(item,index) in modules" :key="index">
+      <div class="m-box" v-for="(item,index) in modulesType" :key="index">
         <div class="head">{{item.name}}</div>
         <ul class="list">
           <li  class="item" v-for="(child,i) in item.children" :key="i" @mousedown.stop="onMouseDown" :data-info="child.name + '|' + child.icon + '|' + child.type">
@@ -23,7 +23,15 @@ export default {
 </script>
 <script setup lang="ts">
     import {reactive} from "vue";
-    const modules = reactive( [
+    import useMouseHook from "./useMouseHook";
+    import * as I from "@/api/interface"
+    interface Props {
+      modules: Array<I.designer.FormItemType>,
+    }
+    const props = withDefaults(defineProps<Props>(),{
+      modules:() => []
+    })
+    const modulesType = reactive( [
       {
         name: "常用",
         children: [
@@ -36,6 +44,7 @@ export default {
         ]
       }
     ])
+    const { onMousedown } = useMouseHook(props.modules)
 </script>
 
 <style scoped lang="scss">

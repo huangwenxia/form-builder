@@ -1,12 +1,6 @@
-import { FormItemType } from "@/views/designer/interface"
-// enum FormItemTypeMap {
-//   INPUT = "input",
-//   RADIO = "radio",
-//   CHECKBOX = "checkbox",
-//   SELECT = "select"
-// }
+import * as I from "@/api/interface";
 
-export const defaultData: Array<FormItemType> = [
+export const defaultData: Array<I.designer.FormItemType> = [
   { id: "1", label: "文本框", type: "input", desc: "", required: false, placeholder: "" },
   {
     id: "2",

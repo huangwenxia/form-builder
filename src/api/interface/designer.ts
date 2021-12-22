@@ -10,7 +10,7 @@ export interface FormDetailType {
 //每个表单项的类型
 export interface FormItemType {
     [key: string]: string | boolean | SelectProps["options"] | Array<string>
-    id: string
+    id?: string
     label: string
     type: string
     required: false
@@ -38,7 +38,7 @@ export  interface Preload {
     module: FormItemType
     index: number
 }
-export interface UpdatePropType {
+export type UpdatePropType = {
     id: string
     key: string
     value: string
