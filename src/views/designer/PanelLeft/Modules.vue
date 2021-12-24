@@ -1,9 +1,9 @@
 <template>
     <div class="Modules">
-      <div class="m-box" v-for="(item,index) in modulesType" :key="index">
+      <div class="m-box" v-for="(item,index) in modulesTypes" :key="index">
         <div class="head">{{item.name}}</div>
         <ul class="list">
-          <li  class="item" v-for="(child,i) in item.children" :key="i" @mousedown.stop="onMouseDown" :data-info="child.name + '|' + child.icon + '|' + child.type">
+          <li  class="item" v-for="(child,i) in item.children" :key="i" @mousedown.stop="onMousedown" :data-info="child.name + '|' + child.icon + '|' + child.type">
             <component class="icon" :is="child.icon" />
             <span class="name">{{ child.name }}</span>
           </li>
@@ -22,16 +22,18 @@ export default {
 }
 </script>
 <script setup lang="ts">
-    import {reactive} from "vue";
+    import {reactive,inject} from "vue";
     import useMouseHook from "./useMouseHook";
     import * as I from "@/api/interface"
+    import {MC} from "@/views/designer/MController";
     interface Props {
       modules: Array<I.designer.FormItemType>,
     }
+    const $MController = inject('$MController') as MC;
     const props = withDefaults(defineProps<Props>(),{
       modules:() => []
     })
-    const modulesType = reactive( [
+    const modulesTypes = reactive( [
       {
         name: "常用",
         children: [
@@ -44,7 +46,7 @@ export default {
         ]
       }
     ])
-    const { onMousedown } = useMouseHook(props.modules)
+    const { onMousedown } = useMouseHook($MController)
 </script>
 
 <style scoped lang="scss">

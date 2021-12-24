@@ -10,7 +10,7 @@
           <ItemControl v-for="(item,index) in modules" :key="index" :data="item" :isEmpty="false">
             <div class="form-item">
               <div class="title">
-                <div class="tit">{{item.label}}<span style="color: red">*</span></div>
+                <div class="tit">{{item.label}}<span v-if="item.required" style="color: red">*</span></div>
                 <div class="txt">{{item.desc}}</div>
               </div>
               <div class="det">
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, reactive, watchEffect} from "vue";
+  import {computed, reactive, watchEffect} from "vue";
   import FromItem from "@/components/FormItem/index.vue";
   import ItemControl from "./ItemControl.vue"
   import * as I from "@/api/interface"
@@ -40,14 +40,24 @@ import {computed, reactive, watchEffect} from "vue";
     content:I.designer.ContentType
     detail:I.designer.FormDetailType
   }
+  interface Form {
+    [key:string] : undefined | string | []
+  }
   const props = withDefaults(defineProps<Props>(),{
       content:()=>({} as I.designer.ContentType),
       detail:()=>({} as I.designer.FormDetailType),
   })
+  const form = reactive({} as Form)  ;
+
   const modules = computed(()=>{
-    return props.content && props.content.modules || []
+    const mds = props.content && props.content.modules || []
+    mds.map(data =>{
+        if(!form[data['id']]) {//初始值
+          form[data['id']] = data.defaultValue || "";
+        }
+    })
+    return mds
   })
-  const form = reactive({})
 </script>
 
 <style lang="scss" scoped>

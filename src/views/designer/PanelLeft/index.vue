@@ -13,7 +13,7 @@
       <Modules :modules="detail.content.modules" />
     </div>
     <div class="tab-content" v-show="currTab==1">
-      皮肤
+      <Skin :content="detail.content"></Skin>
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@ export default {
 <script setup lang="ts">
 import {ref} from "vue";
 import Modules from "./Modules.vue"
+import Skin from "./Skin.vue"
 import * as I from "@/api/interface"
 interface Props {
   detail:I.designer.FormDetailType,

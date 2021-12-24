@@ -1,23 +1,24 @@
 import { SelectProps } from "ant-design-vue/es/select"
+export type Options = SelectProps["options"]
 //整个编辑过程存储的那个表单对象
 export interface FormDetailType {
     id: number
     title: string
     desc: string
     cover: string
-    content: ContentType
+    content: ContentType | null
 }
 //每个表单项的类型
 export interface FormItemType {
     [key: string]: string | boolean | SelectProps["options"] | Array<string>
-    id?: string
+    id: string
     label: string
     type: string
     required: false
     desc?: string
     placeholder?: string
-    options?: SelectProps["options"]
-    defaultValue?: string | Array<string>
+    options?: Options
+    defaultValue?: string | []
 }
 export interface ContentType {
     skin: {

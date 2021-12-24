@@ -1,7 +1,7 @@
 <template>
   <div class="panel-center" :style="detail?.content.skin.containerStyle">
     <div class="wrapper">
-      <div class="head" :style="detail?.content.skin.headerStyle" @click.stop="setHeader">
+      <div class="head" :style="detail?.content.skin.headerStyle">
         <div class="title">{{ detail?.title }}</div>
         <div class="desc">{{ detail?.desc }}</div>
       </div>
@@ -14,7 +14,7 @@
             </div>
             <div class="det">
               <div class="component">
-<!--                <FormItem :data="item" v-model="form[item.id]" />-->
+                <FormItem :data="item" v-model="form[item.id]" />
               </div>
             </div>
           </div>
@@ -29,19 +29,21 @@
 </template>
 <script lang="ts" setup>
 import {ref, Ref, computed } from "vue"
-// import * as Utils from "@/utils"
+import * as I from "@/api/interface"
 import api from "@/api"
 import { SaveParams } from "@/api/form/answer"
 import { useRoute } from "vue-router"
-import { FormDetailType, ContentType } from "@/views/designer/interface"
 import { message } from "ant-design-vue"
-// import FormItem from "@/components/FormItem/index.vue"
-const props = defineProps({
-  mode:String
+import FormItem from "@/components/FormItem/index.vue"
+interface Props{
+  mode:string
+}
+const props = withDefaults(defineProps<Props>(),{
+  mode:''
 })
 
 const route = useRoute()
-const detail: Ref<FormDetailType | null> = ref(null)
+const detail: Ref<I.designer.FormDetailType | null> = ref(null)
 const modules = computed(() => detail.value?.content?.modules || [])
 const form: Ref<SaveParams> = ref({})
 const loading = ref(false)
@@ -51,7 +53,7 @@ const getData = () => {
   api.form
       .detail(+id)
       .then((res) => {
-        let content: ContentType | null
+        let content: I.designer.ContentType | null
         try {
           content = JSON.parse(res.result.publishContent || "")
         } catch (e) {

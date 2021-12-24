@@ -1,6 +1,6 @@
 <template>
   <a-modal title="预览" v-model:visible="visible" :confirm-loading="confirmLoading" :footer="null" width="100%" wrapClassName="full-modal">
-    <Show mode="preview" v-if="visible" />
+    <Show :mode="'preview'" v-if="visible"/>
   </a-modal>
 </template>
 <script lang="ts" setup>
@@ -12,7 +12,14 @@ const confirmLoading: Ref<boolean> = ref(false)
 const open = () => {
   visible.value = true
 }
+const close = () => {
+  visible.value = false
+}
 const labelCol = reactive({ span: 4 })
+
+defineExpose({
+  open
+})
 
 </script>
 <style lang="scss">

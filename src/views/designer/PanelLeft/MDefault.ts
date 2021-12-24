@@ -1,6 +1,6 @@
 import * as I from "@/api/interface";
 
-export const defaultData: Array<I.designer.FormItemType> = [
+export const MDefault: Array<I.designer.FormItemType> = [
   { id: "1", label: "文本框", type: "input", desc: "", required: false, placeholder: "" },
   {
     id: "2",

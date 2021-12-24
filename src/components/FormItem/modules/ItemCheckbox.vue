@@ -8,11 +8,11 @@ import {reactive } from "vue"
 import * as I from "@/api/interface"
 interface Props {
   data:I.designer.FormItemType,
-  modelValue:string
+  modelValue:Array<string>[]
 }
 const props = withDefaults(defineProps<Props>(),{
   data:()=>({} as I.designer.FormItemType),
-  modelValue:"",
+  modelValue:()=>[],
 })
 const radioStyle = reactive({
   display: "flex",

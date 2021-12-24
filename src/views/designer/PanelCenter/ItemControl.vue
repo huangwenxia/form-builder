@@ -1,11 +1,11 @@
 <template>
-  <div class="module-control">
+  <div class="module-control" :class="{ active: $MController.currentModuleId == data.id }" @click.stop="setCurrent">
     <div class="drag-hear"><span>放在这里</span></div>
     <div class="outline"></div>
     <div class="control" v-if="!props.isEmpty">
-      <div class="btn"><ArrowUpOutlined /></div>
-      <div class="btn"><ArrowDownOutlined /></div>
-      <div class="btn"><CloseOutlined /></div>
+      <div class="btn" @click.stop="moduleUp"><ArrowUpOutlined /></div>
+      <div class="btn" @click.stop="moduleDown"><ArrowDownOutlined /></div>
+      <div class="btn" @click.stop="moduleRemove"><CloseOutlined /></div>
     </div>
     <slot></slot>
   </div>
@@ -17,12 +17,35 @@ export  default {
 }
 </script>
 <script setup lang="ts">
- interface Props {
+import * as I from "@/api/interface"
+
+import {inject} from "vue";
+import {MC} from "@/views/designer/MController";
+const $MController = inject('$MController') as MC;
+
+interface Props {
   isEmpty?:boolean,//非必填
+  data?:I.designer.FormItemType
 }
 const props = withDefaults(defineProps<Props>(),{
-  isEmpty:false
+  isEmpty:false,
+  data:()=>({} as I.designer.FormItemType)
 })
+
+ const setCurrent = () => {
+   if (!props.isEmpty) {
+     $MController.setCurrent(props.data.id)
+   }
+ }
+const moduleRemove = () => {
+  $MController.moduleRemove(props.data.id);
+}
+const moduleUp = () => {
+  $MController.moduleUp(props.data.id);
+}
+const moduleDown = () => {
+  $MController.moduleDown(props.data.id);
+}
 </script>
 
 <style scoped lang="scss">
