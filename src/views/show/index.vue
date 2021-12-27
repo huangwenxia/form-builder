@@ -27,6 +27,91 @@
     </div>
   </div>
 </template>
+<!--<script lang="ts">-->
+<!--import {ref, Ref, computed,defineComponent } from "vue"-->
+<!--import * as I from "@/api/interface"-->
+<!--import api from "@/api"-->
+<!--import { SaveParams } from "@/api/form/answer"-->
+<!--import { useRoute } from "vue-router"-->
+<!--import { message } from "ant-design-vue"-->
+<!--import FormItem from "@/components/FormItem/Show.vue"-->
+<!--interface Props{-->
+<!--  mode:string-->
+<!--}-->
+<!--const Props={-->
+<!--  mode:{-->
+<!--    type:String,-->
+<!--    default:""-->
+<!--  }-->
+<!--}-->
+<!--// const props = withDefaults(defineProps<Props>(),{-->
+<!--//   mode:''-->
+<!--// })-->
+<!--export default defineComponent({-->
+<!--  components:{FormItem},-->
+<!--  props: Props,-->
+<!--  setup(props){-->
+<!--    const route = useRoute()-->
+<!--    const detail: Ref<I.designer.FormDetailType | null> = ref(null)-->
+<!--    const modules = computed(() => detail.value?.content?.modules || [])-->
+<!--    const form: Ref<SaveParams> = ref({})-->
+<!--    const loading = ref(false)-->
+<!--    const getData = () => {-->
+<!--      const id = route.query.id || 0-->
+<!--      loading.value = true-->
+<!--      api.form-->
+<!--          .detail(+id)-->
+<!--          .then((res) => {-->
+<!--            let content: I.designer.ContentType | null-->
+<!--            try {-->
+<!--              content = JSON.parse(res.result.publishContent || "")-->
+<!--            } catch (e) {-->
+<!--              content = null-->
+<!--            }-->
+<!--            if (content === null) {-->
+<!--              content = {-->
+<!--                skin: {-->
+<!--                  containerStyle: {},-->
+<!--                  headerStyle: {}-->
+<!--                },-->
+<!--                modules: []-->
+<!--              }-->
+<!--            }-->
+<!--            detail.value = { ...res.result, content }-->
+
+<!--            for (let i in content.modules) {-->
+<!--              const module = content.modules[i]-->
+<!--              form.value[module.id] = module.defaultValue || ""-->
+<!--            }-->
+<!--            console.log("form", form.value)-->
+<!--          })-->
+<!--          .finally(() => {-->
+<!--            loading.value = false-->
+<!--          })-->
+<!--    }-->
+<!--    getData()-->
+<!--    const save = () => {-->
+<!--      if (props.mode == "preview") {-->
+<!--        message.info("当前处于预览模式，无法提交")-->
+<!--        return-->
+<!--      }-->
+<!--      if (detail.value?.id) {-->
+<!--        api.form.answer.save(detail.value?.id, form.value).then(() => {-->
+<!--          message.success("提交成功")-->
+<!--        })-->
+<!--      }-->
+<!--    }-->
+<!--    return{-->
+<!--      detail,-->
+<!--      form,-->
+<!--      modules,-->
+<!--      loading,-->
+<!--      save-->
+<!--    }-->
+<!--  }-->
+
+<!--})-->
+<!--</script>-->
 <script lang="ts" setup>
 import {ref, Ref, computed } from "vue"
 import * as I from "@/api/interface"
