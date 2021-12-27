@@ -1,6 +1,6 @@
 <template>
   <a-modal title="预览" v-model:visible="visible" :confirm-loading="confirmLoading" :footer="null" width="100%" wrapClassName="full-modal">
-    <Show :mode="'preview'" v-if="visible"/>
+      <Show :mode="'preview'"/>
   </a-modal>
 </template>
 <script lang="ts" setup>

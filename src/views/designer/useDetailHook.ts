@@ -25,8 +25,11 @@ export function useDetailHook(){
                     modules: []
                 }
             }
-            $MController.moduleInit(content.modules);//hwx:初始化
             detail.value = { ...res.result, content }
+
+            if(detail.value && detail.value.content && detail.value.content.modules){
+                $MController.moduleInit(detail.value.content.modules);//hwx:顶层初始化，必须链式详情和创建的modules
+            }
         })
     }
     return {detail}

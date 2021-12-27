@@ -28,10 +28,11 @@
   <Preview ref="previewRef" />
 </template>
 <script lang="ts">
+import {defineComponent} from "vue"
 import { SendOutlined,DownloadOutlined } from "@ant-design/icons-vue"
-export default {
+export default defineComponent({
   components:{SendOutlined,DownloadOutlined},
-}
+})
 </script>
 <script setup lang="ts">
 import Preview from "./preview.vue"

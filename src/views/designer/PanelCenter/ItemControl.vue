@@ -1,5 +1,5 @@
 <template>
-  <div class="module-control" :class="{ active: $MController.currentModuleId == data.id }" @click.stop="setCurrent">
+  <div class="module-control" :class="{ active: currentModuleId == data.id }" @click.stop="setCurrent">
     <div class="drag-hear"><span>放在这里</span></div>
     <div class="outline"></div>
     <div class="control" v-if="!props.isEmpty">
@@ -19,7 +19,7 @@ export  default {
 <script setup lang="ts">
 import * as I from "@/api/interface"
 
-import {inject} from "vue";
+import {computed, inject} from "vue";
 import {MC} from "@/views/designer/MController";
 const $MController = inject('$MController') as MC;
 
@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<Props>(),{
   isEmpty:false,
   data:()=>({} as I.designer.FormItemType)
 })
-
+const currentModuleId =computed(()=> $MController.currentModuleId);//hwx:因为在最顶层provide('$MController',reactive($MController))
  const setCurrent = () => {
    if (!props.isEmpty) {
      $MController.setCurrent(props.data.id)
