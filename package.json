@@ -18,10 +18,26 @@
   "devDependencies": {
     "@types/node": "^16.11.12",
     "@types/nprogress": "^0.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
     "@vitejs/plugin-vue": "^1.10.2",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.4",
+    "prettier": "^2.5.1",
     "sass": "^1.45.0",
     "typescript": "^4.4.4",
     "vite": "^2.7.0",
     "vue-tsc": "^0.28.10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

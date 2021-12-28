@@ -28,7 +28,7 @@ export function useDetailHook(){
             detail.value = { ...res.result, content }
 
             if(detail.value && detail.value.content && detail.value.content.modules){
-                $MController.moduleInit(detail.value.content.modules);//hwx:顶层初始化，必须链式详情和创建的modules
+                $MController.moduleInit(detail.value.content.modules);//hwx:顶层初始化，必须链式详情和创建的modules,用store也一样
             }
         })
     }
