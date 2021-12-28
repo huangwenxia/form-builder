@@ -9,7 +9,7 @@ import Antd from "ant-design-vue"
 import "ant-design-vue/dist/antd.css"
 
 const app = createApp(App)
-comps.forEach((a) => {
+compsforEach((a) => {
     const path = a.__file || ""
     path.match(/(\w+)?\.(\w+)/)
     app.component(RegExp.$1, a)
