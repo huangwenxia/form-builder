@@ -12,7 +12,7 @@ module.exports = {
         parser: "@typescript-eslint/parser",
         sourceType: "module"
     },
-    extends: ["eslint:recommended", "plugin:vue/essential", "plugin:@typescript-eslint/recommended", "prettier/@typescript-eslint", "plugin:prettier/recommended"],
+    extends: ["eslint:recommended", "prettier"], //Version 8.0.0 (2021-02-21)Changed: All configs have been merged into one!
 
     plugins: ["vue", "@typescript-eslint"],
     rules: {
