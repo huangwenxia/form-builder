@@ -5,11 +5,19 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "precommit": "lint-staged"
+    "prepare": "husky install",
+    "lint": "lint-staged",
+    "commit": "git add . && npm run lint && git cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-zh"
+    }
   },
   "dependencies": {
     "ant-design-vue": "^3.0.0-alpha.14",
     "axios": "^0.24.0",
+    "inquirer": "^8.2.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "vue": "^3.2.23",
@@ -17,11 +25,16 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
     "@types/node": "^16.11.12",
     "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "@vitejs/plugin-vue": "^1.10.2",
+    "commitizen": "^4.2.4",
+    "conventional-changelog-cli": "^2.2.2",
+    "cz-conventional-changelog-zh": "0.0.2",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -34,8 +47,8 @@
     "vue-tsc": "^0.28.10"
   },
   "lint-staged": {
-    "**/*": [
-      "prettier --write --ignore-unknown"
+    "src/**/*.{js,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
     ]
   }
 }

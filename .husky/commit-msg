@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+#hwx:这里直接两个结合起来了 npm run lint  和 commitlint,所以不需要pre-commit hook了，
+npm run lint && npx --no-install commitlint --edit $1
