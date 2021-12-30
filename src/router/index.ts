@@ -20,15 +20,15 @@ const routes: Array<RouteRecordRaw> = [
         name: "show",
         component: () => import("@/views/show/index.vue")
     },
-    // {
-    //     path: "/detail",
-    //     name: "Detail",
-    //     component: () => import("@/views/detail/index.vue")
-    // },
+    {
+        path: "/detail",
+        name: "Detail",
+        component: () => import("@/views/detail/index.vue")
+    },
     {
         path: "/login",
         name: "Login",
-        component: () => import("../views/public/Login.vue")
+        component: () => import("@/views/public/Login.vue")
     }
 ]
 
@@ -48,7 +48,8 @@ router.beforeEach((to, from, next) => {
                 next()
             })
             .catch(() => {
-                next({//hwx:重定向到登录页面
+                next({
+                    //hwx:重定向到登录页面
                     path: "/login"
                 })
             })
