@@ -1,7 +1,7 @@
 <template>
-    <div class="panel-center" :style="detail?.content.skin.containerStyle">
+    <div class="panel-center" :style="detail?.content?.skin?.containerStyle">
         <div class="wrapper">
-            <div class="head" :style="detail?.content.skin.headerStyle">
+            <div class="head" :style="detail?.content?.skin?.headerStyle">
                 <div class="title">{{ detail?.title }}</div>
                 <div class="desc">{{ detail?.desc }}</div>
             </div>
@@ -35,18 +35,17 @@ import { SaveParams } from "@/api/form/answer"
 import { useRoute } from "vue-router"
 import { message } from "ant-design-vue"
 import FormItem from "@/components/FormItem/index.vue"
+
 interface Props {
     mode: string
 }
+
 const Props = {
     mode: {
         type: String,
         default: ""
     }
 }
-// const props = withDefaults(defineProps<Props>(),{
-//   mode:''
-// })
 export default defineComponent({
     components: { FormItem },
     props: Props,
@@ -183,41 +182,51 @@ export default defineComponent({
     min-height: calc(100vh);
     background: #f1f5f1;
     padding: 20px 0;
+
     .wrapper {
         background: rgba(255, 255, 255, 0.9);
         min-height: calc(100vh - 70px);
         width: 800px;
         margin: 0 auto;
         box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.05);
+
         .head {
             padding: 20px;
             text-align: center;
             border-bottom: 1px solid #ddd;
+
             .title {
                 font-size: 24px;
                 font-weight: 700;
                 line-height: 1.4;
             }
+
             .desc {
                 margin-top: 10px;
             }
         }
+
         .content {
             .form {
                 .form-item {
                     padding: 12px 30px;
+
                     .title {
                         margin-bottom: 10px;
+
                         .txt {
                             color: #999;
                         }
                     }
+
                     .det {
                         padding-left: 10px;
+
                         .component {
                             width: 80%;
                         }
                     }
+
                     .empty {
                         text-align: center;
                         padding: 30px 0;
@@ -228,6 +237,7 @@ export default defineComponent({
         }
     }
 }
+
 .btn-area {
     padding: 30px 0;
     text-align: center;

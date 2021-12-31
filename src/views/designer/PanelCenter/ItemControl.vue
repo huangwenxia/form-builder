@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<Props>(),{
   isEmpty:false,
   data:()=>({} as I.designer.FormItemType)
 })
-const currentModuleId =computed(()=> $MController.currentModuleId);//hwx:因为在最顶层provide('$MController',reactive($MController))
+  const currentModuleId =computed(()=> $MController.currentModuleId)
  const setCurrent = () => {
    if (!props.isEmpty) {
      $MController.setCurrent(props.data.id)

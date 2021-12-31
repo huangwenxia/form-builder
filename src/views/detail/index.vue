@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
     mode: ""
 })
 const route = useRoute()
-const detail: Ref<I.designer.FormDetailType | null> = ref(null)
+const detail: Ref<I.designer.FormDetailType | undefined> = ref(undefined)
 const modules = computed(() => detail.value?.content?.modules || [])
 const form: Ref<SaveParams> = ref({})
 const loading = ref(false)

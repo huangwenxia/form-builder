@@ -1,16 +1,20 @@
 import { SelectProps } from "ant-design-vue/es/select"
+
 export type Options = SelectProps["options"]
+
 //整个编辑过程存储的那个表单对象
 export interface FormDetailType {
     id: number
     title: string
     desc: string
     cover: string
-    content: ContentType | null
+    content: ContentType | undefined
 }
+
 //每个表单项的类型
 export interface FormItemType {
     [key: string]: string | boolean | SelectProps["options"] | Array<string>
+
     id: string
     label: string
     type: string
@@ -20,6 +24,7 @@ export interface FormItemType {
     options?: Options
     defaultValue?: string | []
 }
+
 export interface ContentType {
     skin: {
         containerStyle: StyleType
@@ -27,6 +32,7 @@ export interface ContentType {
     }
     modules: Array<FormItemType>
 }
+
 export interface StyleType {
     [key: string]: string | number
 }
@@ -35,13 +41,14 @@ export interface FormProps {
     currentModuleId: string
     form: FormDetailType
 }
-export  interface Preload {
+
+export interface Preload {
     module: FormItemType
     index: number
 }
+
 export type UpdatePropType = {
     id: string
     key: string
     value: string
 }
-
